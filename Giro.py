@@ -1,6 +1,3 @@
-cd ~/projeto_gygu
-
-cat << 'EOF' > app.py
 from flask import Flask, render_template_string, request
 
 app = Flask(__name__)
@@ -103,7 +100,6 @@ def index():
             minutos = float(minutos_str) if minutos_str else 0
             
             if km > 0:
-                # Ajusta o custo base (R$ 0.75/km) com base no trânsito
                 fator_custo = 1.0
                 if transito == "moderado":
                     fator_custo = 1.15
@@ -119,7 +115,6 @@ def index():
                 if minutos > 0:
                     ganho_hora = (lucro / minutos) * 60
 
-                # Lógica de veredito combinada (KM + Hora)
                 if ganho_km >= 2.00 and (not ganho_hora or ganho_hora >= 35.0):
                     veredito = "🟢 EXCELENTE! Aceita na hora."
                     classe = "excelente"
@@ -153,8 +148,3 @@ def index():
 
 if __name__ == "__main__":
     app.run(debug=True)
-EOF
-
-git add app.py
-git commit -m "Adiciona analise por tempo, hora e condicao de transito"
-git push origin main
